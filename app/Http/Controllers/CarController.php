@@ -17,11 +17,11 @@ class CarController extends Controller
 
             // MPV
             ['name' => 'Mitsubishi Xpander', 'price' => 3500, 'seats' => 7, 'category' => 'MPV','image' => 'mitsubishi.jpg'],
-            ['name' => 'Toyota Avanza', 'price' => 3300, 'seats' => 7, 'category' => 'MPV','image' => 'vios.jpg'],
+            ['name' => 'Toyota Avanza', 'price' => 3300, 'seats' => 7, 'category' => 'MPV','image' => 'Avanza.jpg'],
 
             // SUV
-            ['name' => 'Ford Everest', 'price' => 4500, 'seats' => 7, 'category' => 'SUV','image' => 'vios.jpg'],
-            ['name' => 'Toyota Fortuner', 'price' => 4700, 'seats' => 7, 'category' => 'SUV','image' => 'vios.jpg'],
+            ['name' => 'Ford Everest', 'price' => 4500, 'seats' => 7, 'category' => 'SUV','image' => 'Everest.jpg'],
+            ['name' => 'Toyota Fortuner', 'price' => 4700, 'seats' => 7, 'category' => 'SUV','image' => 'Fortuner.jpg'],
             ['name' => 'Isuzu MU-X', 'price' => 4600, 'seats' => 7, 'category' => 'SUV','image' => 'vios.jpg'],
 
             // Van
@@ -31,8 +31,8 @@ class CarController extends Controller
             ['name' => 'Foton Traveller XL', 'price' => 6200, 'seats' => 18, 'category' => 'Van','image' => 'vios.jpg'],
 
             // Pickup Truck
-            ['name' => 'Toyota Hilux', 'price' => 4800, 'seats' => 5, 'category' => 'Pickup Truck','image' => 'vios.jpg'],
-            ['name' => 'Ford Ranger Raptor', 'price' => 5200, 'seats' => 5, 'category' => 'Pickup Truck','image' => 'vios.jpg'],
+            ['name' => 'Toyota Hilux', 'price' => 4800, 'seats' => 5, 'category' => 'Pickup Truck','image' => 'Hilux.jpg'],
+            ['name' => 'Ford Ranger', 'price' => 5200, 'seats' => 5, 'category' => 'Pickup Truck','image' => 'ford.jpg'],
 
             // Luxury
             ['name' => 'BMW 5 Series', 'price' => 12000, 'seats' => 5, 'category' => 'Luxury','image' => 'vios.jpg'],
@@ -69,8 +69,8 @@ class CarController extends Controller
             ['id' => 9, 'name' => 'Nissan Urvan', 'price' => 5500, 'seats' => 15, 'category' => 'Van', 'image' => 'vios.jpg'],
             ['id' => 10, 'name' => 'Toyota Hiace', 'price' => 6000, 'seats' => 15, 'category' => 'Van', 'image' => 'vios.jpg'],
             ['id' => 11, 'name' => 'Foton Traveller XL', 'price' => 6200, 'seats' => 18, 'category' => 'Van', 'image' => 'vios.jpg'],
-            ['id' => 12, 'name' => 'Toyota Hilux', 'price' => 4800, 'seats' => 5, 'category' => 'Pickup Truck', 'image' => 'vios.jpg'],
-            ['id' => 13, 'name' => 'Ford Ranger Raptor', 'price' => 5200, 'seats' => 5, 'category' => 'Pickup Truck', 'image' => 'vios.jpg'],
+            ['id' => 12, 'name' => 'Toyota Hilux', 'price' => 4800, 'seats' => 5, 'category' => 'Pickup Truck', 'image' => 'Hilux.jpg'],
+            ['id' => 13, 'name' => 'Ford Ranger', 'price' => 5200, 'seats' => 5, 'category' => 'Pickup Truck', 'image' => 'ford.jpg'],
             ['id' => 14, 'name' => 'BMW 5 Series', 'price' => 12000, 'seats' => 5, 'category' => 'Luxury', 'image' => 'vios.jpg'],
             ['id' => 15, 'name' => 'Mercedes-Benz E-Class', 'price' => 13000, 'seats' => 5, 'category' => 'Luxury', 'image' => 'vios.jpg'],
         ];
