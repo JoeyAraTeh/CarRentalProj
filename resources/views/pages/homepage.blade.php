@@ -18,7 +18,7 @@
 <div class="container mx-auto px-4 relative -mt-5 z-10">
     <div class="bg-white shadow-lg rounded-lg p-4 flex flex-wrap md:flex-nowrap items-center gap-4">
         <!-- Wrap inputs inside a form -->
-<form action="{{ route('cars') }}" method="GET" class="w-full flex flex-wrap gap-4">
+<form action="{{ route('car') }}" method="GET" class="w-full flex flex-wrap gap-4">
     <!-- Pick-Up Location -->
     <div class="flex-1 min-w-[200px]">
         <label for="pickup" class="block text-sm font-semibold text-gray-700">Pick-Up Location</label>
