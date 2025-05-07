@@ -2,6 +2,19 @@
 
 @section('content')
 <div class="container mx-auto px-6 py-10">
+<div class="flex justify-end mb-6">
+    <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#333333] text-white font-semibold rounded-full shadow-md hover:bg-[#555555] transition duration-300 ease-in-out">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a2 2 0 002 2h3a2 2 0 002-2V7a2 2 0 00-2-2h-3a2 2 0 00-2 2v1" />
+            </svg>
+            Logout
+        </button>
+    </form>
+</div>
+
     <div class="bg-white shadow-2xl rounded-3xl p-8">
         <h1 class="text-4xl font-bold text-gray-900 mb-8">Admin Dashboard</h1>
 

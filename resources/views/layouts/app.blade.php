@@ -20,10 +20,10 @@
 </head>
 <body>
 
-<!-- Navigation Bar -->
+<!-- Navigation Bar (Hidden on admin routes) -->
+@if (!Route::is('admin.*'))
 <nav class="fixed top-0 left-0 w-full bg-[#70717554] py-4 shadow-lg z-50">
     <div class="container mx-auto flex items-center justify-between px-6">
-        
         <!-- Left Section (Logo + Name) -->
         <div class="flex items-center space-x-3">
             <img src="{{ asset('/logo.png') }}" alt="Logo" class="h-12"> 
@@ -32,35 +32,35 @@
             </span>
         </div>
 
-      <!-- Right Section (Navigation Links) -->
-<ul class="flex space-x-8 text-white text-md font-semibold">
-    <li><a href="{{ url('/homepage') }}" class="hover:text-[#333333] transition duration-300">Home</a></li>
-    <li><a href="{{ url('/services') }}" class="hover:text-[#333333] transition duration-300">Services</a></li>
-    <li><a href="{{ url('/contacts') }}" class="hover:text-[#333333] transition duration-300">Contact</a></li>
+        <!-- Right Section (Navigation Links) -->
+        <ul class="flex space-x-8 text-white text-md font-semibold">
+            <li><a href="{{ url('/homepage') }}" class="hover:text-[#333333] transition duration-300">Home</a></li>
+            <li><a href="{{ url('/services') }}" class="hover:text-[#333333] transition duration-300">Services</a></li>
+            <li><a href="{{ url('/contacts') }}" class="hover:text-[#333333] transition duration-300">Contact</a></li>
 
-    @auth
-        <!-- Logout Button (Form with POST method) -->
-        <li>
-            <form method="POST" action="{{ route('logout') }}">
-                @csrf
-                <button type="submit" class="bg-white text-[#333333] px-4 py-2 rounded-lg hover:bg-[#555555] hover:text-white transition duration-300">
-                    Logout
-                </button>
-            </form>
-        </li>
-    @endauth
+            @auth
+                <li>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="bg-white text-[#333333] px-4 py-2 rounded-lg hover:bg-[#555555] hover:text-white transition duration-300">
+                            Logout
+                        </button>
+                    </form>
+                </li>
+            @endauth
 
-    @guest
-        <!-- Show Login Button only when not logged in -->
-        <li>
-            <a href="{{ route('login') }}" class="bg-white text-[#333333] px-4 py-2 rounded-lg hover:bg-[#555555] hover:text-white transition duration-300">
-                Login
-            </a>
-        </li>
-    @endguest
-</ul>
+            @guest
+                <li>
+                    <a href="{{ route('login') }}" class="bg-white text-[#333333] px-4 py-2 rounded-lg hover:bg-[#555555] hover:text-white transition duration-300">
+                        Login
+                    </a>
+                </li>
+            @endguest
+        </ul>
     </div>
 </nav>
+@endif
+
 
     <div class="container">
         @yield('content')
