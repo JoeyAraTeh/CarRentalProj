@@ -1,3 +1,19 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import './status.css';
+.status-pending {
+  @apply bg-yellow-100;
+}
+
+.status-confirmed {
+  @apply bg-green-100;
+}
+
+.status-completed {
+  @apply bg-blue-100;
+}
+
+.status-cancelled {
+  @apply bg-red-100;
+}

@@ -12,23 +12,40 @@
                 <th class="px-4 py-2">Pickup Date</th>
                 <th class="px-4 py-2">Dropoff Date</th>
                 <th class="px-4 py-2">Service</th>
+                <th class="px-4 py-2">Status</th>
             </tr>
         </thead>
         <tbody>
-            @foreach($rentals as $rental)
-            <tr class="border-t">
-                <td class="px-4 py-2">{{ $rental->id }}</td>
-                <td class="px-4 py-2">
-                    {{ $rental->user->name ?? 'N/A' }}
-                </td>
-                <td class="px-4 py-2">
-                    {{ $rental->car->brand ?? 'Unknown' }} {{ $rental->car->model ?? '' }}
-                </td>
-                <td class="px-4 py-2">{{ $rental->pickup_date }}</td>
-                <td class="px-4 py-2">{{ $rental->dropoff_date }}</td>
-                <td class="px-4 py-2">{{ $rental->service }}</td>
-            </tr>
-            @endforeach
+        @foreach($rentals as $rental)
+        <tr class="border-t
+            @if($rental->status == 'pending') status-pending
+            @elseif($rental->status == 'confirmed') status-confirmed
+            @elseif($rental->status == 'completed') status-completed
+            @elseif($rental->status == 'cancelled') status-cancelled
+            @endif
+        ">
+
+    <td class="px-4 py-2">{{ $rental->id }}</td>
+    <td class="px-4 py-2">{{ $rental->user->name ?? 'N/A' }}</td>
+    <td class="px-4 py-2">{{ $rental->car->brand ?? 'Unknown' }} {{ $rental->car->model ?? '' }}</td>
+    <td class="px-4 py-2">{{ $rental->pickup_date }}</td>
+    <td class="px-4 py-2">{{ $rental->dropoff_date }}</td>
+    <td class="px-4 py-2">{{ $rental->service }}</td>
+    <td class="px-4 py-2">
+        <form action="{{ route('admin.updateRentalStatus', $rental->id) }}" method="POST">
+            @csrf
+            @method('PUT')
+            <select name="status" onchange="this.form.submit()">
+                <option value="pending" {{ $rental->status == 'pending' ? 'selected' : '' }}>Pending</option>
+                <option value="confirmed" {{ $rental->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
+                <option value="completed" {{ $rental->status == 'completed' ? 'selected' : '' }}>Completed</option>
+                <option value="cancelled" {{ $rental->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
+            </select>
+        </form>
+    </td>
+</tr>
+@endforeach
+
         </tbody>
     </table>
 </div>

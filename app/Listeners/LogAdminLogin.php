@@ -10,7 +10,7 @@ class LogAdminLogin
         $user = $event->user;
 
         if ($user->is_admin) {
-            \Log::info("🛡️ Admin {$user->name} has logged in.");
+            \Log::info("Admin {$user->name} has logged in.");
         }
     }
 }

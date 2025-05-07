@@ -14,6 +14,14 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
             },
+            colors: {
+                status: {
+                    pending: '#FFF3CD',   // Light yellow
+                    confirmed: '#D4EDDA', // Light green
+                    completed: '#D1ECF1', // Light blue
+                    cancelled: '#F8D7DA', // Light red
+                },
+            },
         },
     },
 

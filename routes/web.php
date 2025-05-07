@@ -8,6 +8,7 @@ use App\Http\Controllers\ContactsController;
 use App\Http\Controllers\CarController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminCarController;
+use App\Http\Controllers\AdminDashboardController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
     Route::get('/car', [CarController::class, 'index'])->name('car');
 
-    // 🚗 Booking routes
+    // Booking routes
     // Show the booking form (GET)
 Route::get('/car/{id}/book', [CarController::class, 'showBookingForm'])->name('book');
 
@@ -44,11 +45,11 @@ Route::post('/car/{id}/book', [CarController::class, 'submitBooking'])->name('bo
 
 });
 Route::get('/admin/car-category-summary', [AdminCarController::class, 'carCategorySummary'])->name('admin.car_category_summary');
+
 // 🛡️ Admin-only routes (using direct class reference)
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    })->name('admin.dashboard');
+    // Route to dashboard
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
     Route::get('/cars', [AdminCarController::class, 'adminViewAllCars'])->name('admin.cars');
     Route::get('/rentals', [AdminCarController::class, 'viewRentals'])->name('admin.rentals');
@@ -56,11 +57,9 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::delete('/cars/{id}', [AdminCarController::class, 'destroy'])->name('admin.cars.destroy');
     Route::get('/cars/edit/{id}', [AdminCarController::class, 'edit'])->name('admin.edit');
 
-
-
-
-
- 
+    // Route to update the rental status
+    Route::put('/rentals/{id}/status', [AdminCarController::class, 'updateRentalStatus'])->name('admin.updateRentalStatus');
 });
+
 
 require __DIR__.'/auth.php';

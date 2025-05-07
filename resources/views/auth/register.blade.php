@@ -1,5 +1,6 @@
 <x-guest-layout>
-    <form method="POST" action="{{ route('register') }}">
+<div class="bg-gray-100 p-8 rounded-lg shadow-md max-w-md mx-auto">
+        <form method="POST" action="{{ route('register') }}">
         @csrf
 
         <!-- Name -->
@@ -32,7 +33,8 @@
         <div class="mt-4">
             <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
 
-            <x-text-input id="password_confirmation" class="block mt-1 w-full"
+            <x-text-input id="password_confirmation" 
+                            class="block mt-1 w-full"
                             type="password"
                             name="password_confirmation" required autocomplete="new-password" />
 
@@ -49,4 +51,5 @@
             </x-primary-button>
         </div>
     </form>
+</div>
 </x-guest-layout>

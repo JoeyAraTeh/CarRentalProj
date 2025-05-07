@@ -89,15 +89,35 @@ class AdminCarController extends Controller
         $car = Car::findOrFail($id);
         return view('admin.edit', compact('car'));
     }
+
     public function carCategorySummary()
-{
-    // Get the count of cars per category
-    $categories = Car::select('category', \DB::raw('count(*) as total'))
-        ->groupBy('category')
-        ->get();
+    {
+        // Create a subquery that counts cars per category
+        $subquery = Car::select('category', \DB::raw('COUNT(*) as total'))
+            ->groupBy('category');
+    
+        // Wrap it as a subquery and alias it
+        $categories = \DB::table(\DB::raw("({$subquery->toSql()}) as sub"))
+            ->mergeBindings($subquery->getQuery()) // Important to apply bindings
+            ->select('sub.category', 'sub.total')
+            ->get();
+    
+        return view('admin.car_category_summary', compact('categories'));
+    }
 
-    // Pass the data to the view
-    return view('admin.car_category_summary', compact('categories'));
-}
+    public function updateRentalStatus($id, Request $request)
+    {
+        // Validate the status input
+        $request->validate([
+            'status' => 'required|in:pending,confirmed,completed,cancelled',
+        ]);
 
+        // Find the booking by ID and update the status
+        $rental = Booking::findOrFail($id);
+        $rental->status = $request->status;
+        $rental->save();
+
+        // Redirect back to the rentals page with a success message
+        return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
+    }
 }

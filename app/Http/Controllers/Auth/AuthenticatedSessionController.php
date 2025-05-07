@@ -27,7 +27,12 @@ class AuthenticatedSessionController extends Controller
     $request->authenticate();
     $request->session()->regenerate();
 
-    return redirect()->intended('/homepage'); // Redirect to homepage instead of dashboard
+    $user = Auth::user();
+    if ($user->is_admin) {
+        return redirect()->route('admin.dashboard');
+    }
+
+    return redirect()->intended('/homepage');
 }
 
 
