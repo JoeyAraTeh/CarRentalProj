@@ -17,7 +17,7 @@
                 </div>
                 <div>
                     <label class="block text-sm text-[#E1F4F3] mb-1">Date Range</label>
-                    <div class="bg-white text-[#333] rounded-lg p-3 border border-[#706C61]">{{ request('date_range') }}</div>
+                    <div class="bg-white text-[#333] rounded-lg p-3 border border-[#706C61]">{{ request('date_range') ?? 'No date selected' }}</div>
                 </div>
                 <div>
                     <label class="block text-sm text-[#E1F4F3] mb-1">Pickup Time</label>
@@ -81,7 +81,10 @@
 
                 <!-- Book Now Button -->
                 @if(!$isRented)
-                <a href="{{ route('book', ['id' => $car->id]) }}" class="inline-block w-full text-center bg-[#706C61] text-[#ffffff] px-3 py-2 rounded hover:bg-[#333] hover:text-white transition text-xs font-medium">Book Now</a>
+               <a href="{{ route('book', ['id' => $car->id]) }}?pickup={{ request('pickup') }}&dropoff={{ request('dropoff') }}&date_range={{ request('date_range') }}&pickup_time={{ request('pickup_time') }}&dropoff_time={{ request('dropoff_time') }}"
+   class="inline-block w-full text-center bg-[#706C61] text-[#ffffff] px-3 py-2 rounded hover:bg-[#333] hover:text-white transition text-xs font-medium">
+   Book Now
+</a>
                 @endif
             </div>
 

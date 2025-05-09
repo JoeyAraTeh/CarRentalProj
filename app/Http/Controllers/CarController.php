@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Car;
 use App\Models\Booking;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
@@ -15,11 +13,9 @@ class CarController extends Controller
         $cars = Car::all();
         $groupedCars = $cars->groupBy('category');
 
-        // Get IDs of currently rented cars (e.g. bookings that are confirmed or active)
+        // Get IDs of currently rented cars
         $rentedCarIds = Booking::where('status', 'confirmed')->pluck('car_id')->toArray();
 
         return view('car', compact('groupedCars', 'rentedCarIds'));
     }
-
-   
 }

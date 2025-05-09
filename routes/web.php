@@ -18,54 +18,50 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     $user = Auth::user();
 
-    // Check if the user is an admin
     if ($user && $user->role === 'admin') {
         return redirect()->route('admin.dashboard');
     }
 
-    // Redirect normal users to homepage
     return redirect()->route('homepage');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 // 🔒 Authenticated user routes
 Route::middleware('auth')->group(function () {
+    // Profile routes
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    // General pages
     Route::get('/homepage', [HomepageController::class, 'index'])->name('homepage');
     Route::get('/services', [ServicesController::class, 'index'])->name('services');
     Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
+
+    // Car listing
     Route::get('/car', [CarController::class, 'index'])->name('car');
-    Route::get('/bookings', [BookingController::class, 'mybookings'])->name('bookings');
 
- 
-// Display the booking form
-Route::get('/car/{id}/book', [BookingController::class, 'showBookingForm'])->name('book.form');
-
-// Handle form submission
-Route::post('/car/{id}/book', [BookingController::class, 'submitBooking'])->name('book');
-
-
+    // Booking routes
+    Route::get('/car/{id}/book', [BookingController::class, 'showBookingForm'])->name('book');
+    Route::post('/car/{id}/book', [BookingController::class, 'submitBooking'])->name('book');
+    Route::get('/bookings', [BookingController::class, 'myBookings'])->name('bookings');
 });
-Route::get('/admin/car-category-summary', [AdminCarController::class, 'carCategorySummary'])->name('admin.car_category_summary');
 
-// 🛡️ Admin-only routes (using direct class reference)
+// Admin-only routes
 Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(function () {
-    // Route to dashboard
     Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 
+    // Admin car routes
     Route::get('/cars', [AdminCarController::class, 'adminViewAllCars'])->name('admin.cars');
     Route::get('/rentals', [AdminCarController::class, 'viewRentals'])->name('admin.rentals');
     Route::get('/cars/create', [AdminCarController::class, 'create'])->name('admin.cars.create');
     Route::delete('/cars/{id}', [AdminCarController::class, 'destroy'])->name('admin.cars.destroy');
     Route::get('/cars/edit/{id}', [AdminCarController::class, 'edit'])->name('admin.edit');
-   
 
-
-    // Route to update the rental status
+    // Rental status update
     Route::put('/rentals/{id}/status', [AdminCarController::class, 'updateRentalStatus'])->name('admin.updateRentalStatus');
 });
 
+// Admin car category summary (outside prefix group)
+Route::get('/admin/car-category-summary', [AdminCarController::class, 'carCategorySummary'])->name('admin.car_category_summary');
 
 require __DIR__.'/auth.php';

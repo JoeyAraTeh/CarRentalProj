@@ -41,17 +41,15 @@ class BookingController extends Controller
         }
 
 
-        return view('book', [
+       return view('book', [
             'car' => $car,
             'pickup' => $request->pickup,
             'dropoff' => $request->dropoff,
             'pickup_time' => $request->pickup_time,
             'dropoff_time' => $request->dropoff_time,
-            'pickup_date' => $pickup_date,
-            'dropoff_date' => $dropoff_date,
+            'date_range' => $request->date_range,
         ]);
     }
-
 
    public function submitBooking(Request $request, $id)
 {
