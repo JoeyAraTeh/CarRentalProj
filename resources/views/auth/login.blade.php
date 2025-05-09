@@ -17,8 +17,6 @@
                     <p class="text-sm text-gray-500">Access your rentals and manage bookings</p>
                 </div>
 
-                <x-auth-session-status class="mb-4" :status="session('status')" />
-
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
 
@@ -51,7 +49,12 @@
                     />
                     <x-input-error :messages="$errors->get('password')" class="mt-2" />
                 </div>
-
+                <x-auth-session-status class="mb-4" :status="session('status')" />
+                @if (session('success'))
+                    <div class="mb-4 text-green-600 text-xs">
+                        {{ session('success') }}
+                    </div>
+                @endif
 
                     <!-- Remember Me + Forgot -->
                     <div class="flex items-center justify-between mt-4">
