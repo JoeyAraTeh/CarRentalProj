@@ -49,6 +49,29 @@
     });
 </script>
 
+<section class="flex flex-col justify-center items-center text-center py-12 mt-20 bg-[#222222] text-white">
+    <h2 class="text-2xl font-bold mb-6">Why Choose FLEXIDRIVE?</h2>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8 max-w-5xl mx-auto text-sm">
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/flexible.png') }}" alt="Flexibility Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">Flexibility in Travel</h3>
+            <p class="mt-1 text-center">Choose self-drive or chauffeur for a tailored journey.</p>
+        </div>
+        <div class="hidden md:block w-px bg-white h-16"></div>
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/affordable.png') }}" alt="Affordable Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">Affordable Solutions</h3>
+            <p class="mt-1 text-center">Budget-friendly travel for students and professionals.</p>
+        </div>
+        <div class="hidden md:block w-px bg-white h-16"></div>
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/ufriendly.png') }}" alt="User-Friendly Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">User-Friendly Booking</h3>
+            <p class="mt-1 text-center">Seamless booking for your convenience.</p>
+        </div>
+    </div>
+</section>
+
 <!-- Services Overview Section -->
 <section class="py-12 mt-12">
     <div class="max-w-5xl mx-auto px-6">
@@ -77,30 +100,6 @@
                 <h3 class="text-xl font-semibold text-gray-900 mt-3">{{ $service['title'] }}</h3>
             </a>
             @endforeach
-        </div>
-    </div>
-</section>
-
-
-<section class="flex flex-col justify-center items-center text-center py-12 mt-20 bg-[#222222] text-white">
-    <h2 class="text-2xl font-bold mb-6">Why Choose FLEXIDRIVE?</h2>
-    <div class="flex flex-col md:flex-row items-center justify-center gap-8 max-w-5xl mx-auto text-sm">
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/flexible.png') }}" alt="Flexibility Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">Flexibility in Travel</h3>
-            <p class="mt-1 text-center">Choose self-drive or chauffeur for a tailored journey.</p>
-        </div>
-        <div class="hidden md:block w-px bg-white h-16"></div>
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/affordable.png') }}" alt="Affordable Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">Affordable Solutions</h3>
-            <p class="mt-1 text-center">Budget-friendly travel for students and professionals.</p>
-        </div>
-        <div class="hidden md:block w-px bg-white h-16"></div>
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/ufriendly.png') }}" alt="User-Friendly Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">User-Friendly Booking</h3>
-            <p class="mt-1 text-center">Seamless booking for your convenience.</p>
         </div>
     </div>
 </section>

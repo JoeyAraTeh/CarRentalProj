@@ -81,35 +81,61 @@
     });
 </script>
 
-<!-- Available Cars Section -->
-<section class="py-12">
-    <div class="max-w-6xl mx-auto px-6">
-        <div class="flex justify-between items-center mb-6">
+<!-- Available Cars Overview -->
+<section class="py-12 mt-10">
+    <div class="max-w-6xl mx-auto px-4">
+        <div class="flex justify-between items-center mb-8">
             <h2 class="text-3xl font-bold text-[#333333]">Available Cars</h2>
             <a href="{{ route('car') }}" class="text-[#333333] font-semibold hover:text-[#555555] transition flex items-center">
                 View All Cars <i class="fas fa-arrow-right ml-2"></i>
             </a>
         </div>
 
-        @foreach($groupedCars as $category => $categoryCars)
-            <h3 class="text-2xl font-semibold text-gray-800 mt-8 mb-4">{{ $category }}</h3>
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                @foreach($categoryCars as $car)
-                    <div class="bg-white shadow-md rounded-lg p-5 text-center">
-                        <img src="{{ asset('images/cars/' . $car['image']) }}" alt="{{ $car['name'] }}" class="w-full h-48 object-cover rounded-md mb-4">
-                        <h4 class="text-xl font-bold text-gray-900">{{ $car['name'] }}</h4>
-                        <p class="text-gray-600 mt-1">₱{{ number_format($car['price'], 2) }} / day</p>
-                        <p class="text-gray-500">Seats: {{ $car['seats'] }}</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            @foreach($groupedCars as $category => $categoryCars)
+                @foreach($categoryCars->take(1) as $car)
+                    <div class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
+                        <!-- Reduced image size for better fit -->
+                        <img src="{{ asset('images/cars/' . $car['image']) }}" alt="{{ $car['name'] }}" class="w-full h-32 object-cover">
+                        <div class="p-4">
+                            <h3 class="font-semibold text-lg text-[#333333] mb-1">{{ $car['name'] }}</h3>
+                            <p class="text-sm text-[#706C61]">{{ $category }}</p>
+                        </div>
                     </div>
                 @endforeach
-            </div>
-        @endforeach
+            @endforeach
+        </div>
     </div>
 </section>
 
 
+
+<!-- Features Section -->
+<section class="flex flex-col justify-center items-center text-center py-12 mt-10 bg-[#222222] text-white">
+    <h2 class="text-2xl font-bold mb-6">Why Choose FLEXIDRIVE?</h2>
+    <div class="flex flex-col md:flex-row items-center justify-center gap-8 max-w-5xl mx-auto text-sm">
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/flexible.png') }}" alt="Flexibility Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">Flexibility in Travel</h3>
+            <p class="mt-1 text-center">Choose self-drive or chauffeur for a tailored journey.</p>
+        </div>
+        <div class="hidden md:block w-px bg-white h-16"></div>
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/affordable.png') }}" alt="Affordable Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">Affordable Solutions</h3>
+            <p class="mt-1 text-center">Budget-friendly travel for students and professionals.</p>
+        </div>
+        <div class="hidden md:block w-px bg-white h-16"></div>
+        <div class="flex flex-col items-center">
+            <img src="{{ asset('/keypoints/ufriendly.png') }}" alt="User-Friendly Icon" class="h-10 mb-2" />
+            <h3 class="font-semibold">User-Friendly Booking</h3>
+            <p class="mt-1 text-center">Seamless booking for your convenience.</p>
+        </div>
+    </div>
+</section>
+
 <!-- Services Overview Section -->
-<section class="py-12 mt-12">
+<section class="py-12 mt-10">
     <div class="max-w-5xl mx-auto px-6">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-3xl font-bold text-[#333333]">Services</h2>
@@ -141,29 +167,7 @@
 </section>
 
 
-<!-- Features Section -->
-<section class="flex flex-col justify-center items-center text-center py-12 mt-20 bg-[#222222] text-white">
-    <h2 class="text-2xl font-bold mb-6">Why Choose FLEXIDRIVE?</h2>
-    <div class="flex flex-col md:flex-row items-center justify-center gap-8 max-w-5xl mx-auto text-sm">
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/flexible.png') }}" alt="Flexibility Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">Flexibility in Travel</h3>
-            <p class="mt-1 text-center">Choose self-drive or chauffeur for a tailored journey.</p>
-        </div>
-        <div class="hidden md:block w-px bg-white h-16"></div>
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/affordable.png') }}" alt="Affordable Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">Affordable Solutions</h3>
-            <p class="mt-1 text-center">Budget-friendly travel for students and professionals.</p>
-        </div>
-        <div class="hidden md:block w-px bg-white h-16"></div>
-        <div class="flex flex-col items-center">
-            <img src="{{ asset('/keypoints/ufriendly.png') }}" alt="User-Friendly Icon" class="h-10 mb-2" />
-            <h3 class="font-semibold">User-Friendly Booking</h3>
-            <p class="mt-1 text-center">Seamless booking for your convenience.</p>
-        </div>
-    </div>
-</section>
+
 
 
 
