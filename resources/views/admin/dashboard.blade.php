@@ -23,7 +23,7 @@
             <ul class="flex flex-wrap gap-4">
                 <li>
                     <a href="{{ route('admin.cars') }}"
-                       class="inline-block px-5 py-3 bg-[#333333] text-white text-base font-medium rounded-lg hover:bg-[#1f1f1f] transition-all duration-200 shadow">
+                       class="inline-block px-5 py-3 bg-[#706C61] text-white text-base font-medium rounded-lg hover:bg-[#5a574f]  transition-all duration-200 shadow">
                         Manage Cars
                     </a>
                 </li>
@@ -33,6 +33,13 @@
                         View Rentals
                     </a>
                 </li>
+                <li>
+                    <a href="{{ route('admin.messages') }}"
+                    class="inline-block px-5 py-3 bg-[#706C61] text-white text-base font-medium rounded-lg hover:bg-[#5a574f]  transition-all duration-200 shadow">
+                        View Messages
+                    </a>
+                </li>
+
             </ul>
         </nav>
 
@@ -62,6 +69,7 @@
                         <h3 class="text-sm font-medium text-[#333333] uppercase tracking-wide">Available Cars</h3>
                         <p class="text-3xl font-semibold text-[#333333] mt-2">{{ $availableCars }}</p>
                     </div>
+
                 </div>
             </div>
         </div>
