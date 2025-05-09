@@ -11,18 +11,19 @@ class Booking extends Model
     use HasFactory;
 
     // Define which fields are mass-assignable
-    protected $fillable = [
-        'car_id',
-        'email', 
-        'pickup_location',
-        'dropoff_location',
-        'pickup_date',
-        'dropoff_date',
-        'pickup_time',
-        'dropoff_time',
-        'service'
-        
-    ];
+   protected $fillable = [
+    'car_id',
+    'pickup_location',
+    'dropoff_location',
+    'pickup_date',
+    'dropoff_date',
+    'pickup_time',
+    'dropoff_time',
+    'service',
+    'email',
+    'status',
+];
+
     
 
     // Define the relationship to the Car model

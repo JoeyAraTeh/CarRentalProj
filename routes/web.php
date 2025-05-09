@@ -39,11 +39,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/car', [CarController::class, 'index'])->name('car');
     Route::get('/bookings', [BookingController::class, 'mybookings'])->name('bookings');
 
-    // Booking routes
-    // Show the booking form (GET)
-Route::get('/car/{id}/book', [CarController::class, 'showBookingForm'])->name('book');
+ 
+// Display the booking form
+Route::get('/car/{id}/book', [BookingController::class, 'showBookingForm'])->name('book.form');
 
-Route::post('/car/{id}/book', [CarController::class, 'submitBooking'])->name('book');
+// Handle form submission
+Route::post('/car/{id}/book', [BookingController::class, 'submitBooking'])->name('book');
+
 
 });
 Route::get('/admin/car-category-summary', [AdminCarController::class, 'carCategorySummary'])->name('admin.car_category_summary');

@@ -26,7 +26,7 @@
         ">
 
     <td class="px-4 py-2">{{ $rental->id }}</td>
-    <td class="px-4 py-2">{{ $rental->user->name ?? 'N/A' }}</td>
+   <td class="px-4 py-2">{{ $rental->user->email ?? $rental->email ?? 'N/A' }}</td>
     <td class="px-4 py-2">{{ $rental->car->brand ?? 'Unknown' }} {{ $rental->car->model ?? '' }}</td>
     <td class="px-4 py-2">{{ $rental->pickup_date }}</td>
     <td class="px-4 py-2">{{ $rental->dropoff_date }}</td>

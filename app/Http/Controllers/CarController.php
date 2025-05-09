@@ -21,39 +21,5 @@ class CarController extends Controller
         return view('car', compact('groupedCars', 'rentedCarIds'));
     }
 
-    public function showBookingForm($id)
-    {
-        $car = Car::find($id);
-
-        if (!$car) {
-            abort(404, 'Car not found.');
-        }
-
-        return view('book', compact('car'));
-    }
-
-    public function submitBooking(Request $request, $carId)
-    {
-        $car = Car::findOrFail($carId);
-        $user = Auth::user();
-
-        if (!$user) {
-            return redirect()->route('login')->with('error', 'Please log in to book a car.');
-        }
-
-        Booking::create([
-            'car_id' => $car->id,
-            'email' => $user->email,
-            'pickup_location' => $request->pickup_location,
-            'dropoff_location' => $request->dropoff_location,
-            'pickup_date' => $request->pickup_date,
-            'dropoff_date' => $request->dropoff_date,
-            'pickup_time' => $request->pickup_time,
-            'dropoff_time' => $request->dropoff_time,
-            'service' => $request->service,
-            'status' => 'confirmed', // Make sure status is set appropriately
-        ]);
-
-        return redirect()->route('book', $carId)->with('success', 'Booking successful!');
-    }
+   
 }

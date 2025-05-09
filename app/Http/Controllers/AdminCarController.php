@@ -102,15 +102,21 @@ class AdminCarController extends Controller
     }
 
     public function updateRentalStatus($id, Request $request)
-    {
-        $request->validate([
-            'status' => 'required|in:pending,confirmed,completed,cancelled',
-        ]);
+{
+    $request->validate([
+        'status' => 'required|in:pending,confirmed,completed,cancelled',
+    ]);
 
-        $rental = Booking::findOrFail($id);
-        $rental->status = $request->status;
-        $rental->save();
+    $rental = Booking::findOrFail($id);
 
-        return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
+    if ($request->status === 'cancelled') {
+        $rental->delete(); // 🚮 Delete booking if cancelled
+        return redirect()->route('admin.rentals')->with('success', 'Booking cancelled and deleted.');
     }
+
+    $rental->status = $request->status;
+    $rental->save();
+
+    return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
+}
 }
