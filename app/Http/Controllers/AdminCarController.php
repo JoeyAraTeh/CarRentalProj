@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Car;
-use App\Models\Booking; // Add this line
+use App\Models\Booking;
 use Illuminate\Support\Facades\File;
 
 class AdminCarController extends Controller
@@ -16,28 +16,26 @@ class AdminCarController extends Controller
 
     public function adminViewAllCars()
     {
-        // Get all cars from the database and group them by category
+        // Get all car IDs that are currently rented (confirmed bookings)
+        $rentedCarIds = Booking::where('status', 'confirmed')->pluck('car_id')->toArray();
+
+        // Get all cars grouped by category
         $groupedCars = Car::all()->groupBy('category');
-    
-        // Get the total number of cars per category
+
+        // Get total car count per category
         $carCategoryCounts = Car::select('category', \DB::raw('count(*) as total'))
-            ->groupBy('category')
-            ->pluck('total', 'category')
-            ->toArray();
-    
-        // Pass the grouped cars and counts to the view
-        return view('admin.cars', compact('groupedCars', 'carCategoryCounts'));
+                                ->groupBy('category')
+                                ->pluck('total', 'category')
+                                ->toArray();
+
+        return view('admin.cars', compact('groupedCars', 'carCategoryCounts', 'rentedCarIds'));
     }
 
     public function viewRentals()
     {
-        // Fetch real booking data from the database with car and user (optional) relationships
         $rentals = Booking::with(['car', 'user'])->latest()->get();
-
         return view('admin.rentals', compact('rentals'));
     }
-
-  
 
     public function store(Request $request)
     {
@@ -92,32 +90,27 @@ class AdminCarController extends Controller
 
     public function carCategorySummary()
     {
-        // Create a subquery that counts cars per category
         $subquery = Car::select('category', \DB::raw('COUNT(*) as total'))
             ->groupBy('category');
-    
-        // Wrap it as a subquery and alias it
+
         $categories = \DB::table(\DB::raw("({$subquery->toSql()}) as sub"))
-            ->mergeBindings($subquery->getQuery()) // Important to apply bindings
+            ->mergeBindings($subquery->getQuery())
             ->select('sub.category', 'sub.total')
             ->get();
-    
+
         return view('admin.car_category_summary', compact('categories'));
     }
 
     public function updateRentalStatus($id, Request $request)
     {
-        // Validate the status input
         $request->validate([
             'status' => 'required|in:pending,confirmed,completed,cancelled',
         ]);
 
-        // Find the booking by ID and update the status
         $rental = Booking::findOrFail($id);
         $rental->status = $request->status;
         $rental->save();
 
-        // Redirect back to the rentals page with a success message
         return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
     }
 }

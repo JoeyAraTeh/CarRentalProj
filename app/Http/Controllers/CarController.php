@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Car;
-use Illuminate\Http\Request;
 use App\Models\Booking;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CarController extends Controller
 {
@@ -14,10 +15,12 @@ class CarController extends Controller
         $cars = Car::all();
         $groupedCars = $cars->groupBy('category');
 
-        return view('car', compact('groupedCars'));
+        // Get IDs of currently rented cars (e.g. bookings that are confirmed or active)
+        $rentedCarIds = Booking::where('status', 'confirmed')->pluck('car_id')->toArray();
+
+        return view('car', compact('groupedCars', 'rentedCarIds'));
     }
 
-   
     public function showBookingForm($id)
     {
         $car = Car::find($id);
@@ -31,12 +34,16 @@ class CarController extends Controller
 
     public function submitBooking(Request $request, $carId)
     {
-        // Find the car using the ID
         $car = Car::findOrFail($carId);
-    
-        // Create a new booking
-        $booking = Booking::create([
+        $user = Auth::user();
+
+        if (!$user) {
+            return redirect()->route('login')->with('error', 'Please log in to book a car.');
+        }
+
+        Booking::create([
             'car_id' => $car->id,
+            'email' => $user->email,
             'pickup_location' => $request->pickup_location,
             'dropoff_location' => $request->dropoff_location,
             'pickup_date' => $request->pickup_date,
@@ -44,9 +51,9 @@ class CarController extends Controller
             'pickup_time' => $request->pickup_time,
             'dropoff_time' => $request->dropoff_time,
             'service' => $request->service,
+            'status' => 'confirmed', // Make sure status is set appropriately
         ]);
 
         return redirect()->route('book', $carId)->with('success', 'Booking successful!');
-
     }
 }

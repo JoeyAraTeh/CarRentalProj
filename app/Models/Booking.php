@@ -12,9 +12,18 @@ class Booking extends Model
 
     // Define which fields are mass-assignable
     protected $fillable = [
-        'car_id', 'pickup_location', 'dropoff_location', 'pickup_date',
-        'dropoff_date', 'pickup_time', 'dropoff_time', 'service'
+        'car_id',
+        'email', 
+        'pickup_location',
+        'dropoff_location',
+        'pickup_date',
+        'dropoff_date',
+        'pickup_time',
+        'dropoff_time',
+        'service'
+        
     ];
+    
 
     // Define the relationship to the Car model
     public function car()

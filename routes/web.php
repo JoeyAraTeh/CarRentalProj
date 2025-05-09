@@ -9,6 +9,7 @@ use App\Http\Controllers\CarController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Controllers\AdminCarController;
 use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\BookingController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -36,6 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/services', [ServicesController::class, 'index'])->name('services');
     Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
     Route::get('/car', [CarController::class, 'index'])->name('car');
+    Route::get('/bookings', [BookingController::class, 'mybookings'])->name('bookings');
 
     // Booking routes
     // Show the booking form (GET)
@@ -56,6 +58,8 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::get('/cars/create', [AdminCarController::class, 'create'])->name('admin.cars.create');
     Route::delete('/cars/{id}', [AdminCarController::class, 'destroy'])->name('admin.cars.destroy');
     Route::get('/cars/edit/{id}', [AdminCarController::class, 'edit'])->name('admin.edit');
+   
+
 
     // Route to update the rental status
     Route::put('/rentals/{id}/status', [AdminCarController::class, 'updateRentalStatus'])->name('admin.updateRentalStatus');

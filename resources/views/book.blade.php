@@ -60,12 +60,15 @@
                 </select>
             </div>
         </div>
+        @auth
+    <input type="hidden" name="email" value="{{ auth()->user()->email }}">
+@endauth
 
-        <div class="pt-4">
-            <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-6 py-3 rounded-xl shadow hover:bg-blue-700 transition-all duration-300">
-                Confirm Booking
-            </button>
-        </div>
+<div class="pt-4">
+    <button type="submit" class="w-full md:w-auto bg-blue-600 text-white px-6 py-3 rounded-xl shadow hover:bg-blue-700 transition-all duration-300">
+        Confirm Booking
+    </button>
+</div>
     </form>
 </div>
 

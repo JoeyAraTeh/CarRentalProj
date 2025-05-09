@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -21,17 +20,18 @@ class AdminDashboardController extends Controller
         // Count how many unique cars are currently rented
         $rentedCars = $rentedCarIds->count();
     
-        // Available cars = Total - Currently rented
+        // Available cars = Total - Currently rented (excluding confirmed bookings)
         $availableCars = $totalCars - $rentedCars;
     
-        // Completed rentals count
+        // Completed rentals count (rentals that are marked as completed)
         $completedRentals = Booking::where('status', 'completed')->count();
-    
-        return view('admin.dashboard', [
-            'availableCars' => $availableCars,      // Replace totalCars with availableCars
-            'rentedCars' => $rentedCars,            // Currently rented (confirmed)
-            'completedRentals' => $completedRentals // Rentals that were completed
-        ]);
-    }    
 
-}    
+        // Pass the data to the view
+        return view('admin.dashboard', [
+            'availableCars' => $availableCars,      // Total available cars (not rented)
+            'rentedCars' => $rentedCars,            // Cars that are currently rented (confirmed bookings)
+            'completedRentals' => $completedRentals // Total completed rentals
+        ]);
+    }
+}
+
