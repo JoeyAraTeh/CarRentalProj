@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Car;
 use App\Models\Booking;
+use App\Models\ContactMessage;
 
 class AdminDashboardController extends Controller
 {
@@ -33,5 +34,15 @@ class AdminDashboardController extends Controller
             'completedRentals' => $completedRentals // Total completed rentals
         ]);
     }
+
+
+    public function viewMessages()
+{
+    // Assuming you have a Message model to fetch messages from the database
+    $messages = \App\Models\ContactMessage::all(); // Fetch all messages from the 'messages' table
+
+    return view('admin.messages', compact('messages')); // Pass messages to the view
+}
+
 }
 

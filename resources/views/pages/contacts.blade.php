@@ -20,21 +20,23 @@
             <h1 class="text-4xl font-extrabold text-[#333333] text-center">Contact Us</h1>
             <p class="text-[#706C61] text-center mt-3">We'd love to hear from you. Reach out with any questions or inquiries.</p>
             
-            <form class="mt-8 space-y-6">
+            <form class="mt-8 space-y-6" method="POST" action="{{ route('contacts.submit') }}">
+                @csrf
                 <div class="relative">
                     <label class="block text-[#333333] font-medium">Name</label>
-                    <input type="text" class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" placeholder="Enter your name">
+                    <input type="text" name="name" class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" placeholder="Enter your name">
                 </div>
                 <div class="relative">
                     <label class="block text-[#333333] font-medium">Email</label>
-                    <input type="email" class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" placeholder="Enter your email">
+                    <input type="email" name="email" class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" placeholder="Enter your email">
                 </div>
                 <div class="relative">
                     <label class="block text-[#333333] font-medium">Message</label>
-                    <textarea class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" rows="5" placeholder="Write your message here..."></textarea>
+                    <textarea name="message" class="w-full mt-2 p-3 border border-[#706C61] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#333333] transition" rows="5" placeholder="Write your message here..."></textarea>
                 </div>
-                <button class="w-full bg-[#706C61] text-white py-3 rounded-lg font-semibold hover:bg-[#333333] transition-all duration-300">Send Message</button>
+                <button type="submit" class="w-full bg-[#706C61] text-white py-3 rounded-lg font-semibold hover:bg-[#333333] transition-all duration-300">Send Message</button>
             </form>
+
         </div>
     </div>
 </div>

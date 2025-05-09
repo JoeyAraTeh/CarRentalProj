@@ -61,6 +61,11 @@ Route::middleware(['auth', AdminMiddleware::class])->prefix('admin')->group(func
     Route::delete('/cars/{id}', [AdminCarController::class, 'destroy'])->name('admin.cars.destroy');
     Route::get('/cars/edit/{id}', [AdminCarController::class, 'edit'])->name('admin.edit');
    
+Route::middleware(['auth'])->group(function () {
+    Route::get('/admin/messages', [AdminDashboardController::class, 'viewMessages'])->name('admin.messages');
+});
+Route::post('/contacts', [ContactsController::class, 'submit'])->name('contacts.submit');
+Route::get('/messages', [AdminDashboardController::class, 'viewMessages'])->name('admin.contactUs');
 
 
     // Route to update the rental status
