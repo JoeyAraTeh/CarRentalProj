@@ -5,10 +5,11 @@
     <div class="container mx-auto px-4 py-10 bg-white min-h-screen">
         <h2 class="text-3xl font-bold text-black mb-8">My Booking History</h2>
 
-        @if ($bookings->isEmpty())
-            <p class="text-black-400">You don't have any bookings yet.</p>
-        @else
+            @if ($bookings->isEmpty())
+                <p class="text-black-400">You don't have any bookings yet.</p>
+            @else
             <div class="space-y-6 max-w-md ml-0 sm:ml-4">
+                <!-- displays each car booking's details -->
                 @foreach ($bookings as $booking)
                     <div class="bg-[#1a1a1a] rounded-xl shadow-lg p-6 border-l-4 border-gray-500">
                         <div class="flex justify-between items-center mb-4">

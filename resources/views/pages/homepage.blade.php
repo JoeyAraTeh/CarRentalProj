@@ -92,10 +92,10 @@
         </div>
 
         <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            <!-- shows one car per category -->
             @foreach($groupedCars as $category => $categoryCars)
                 @foreach($categoryCars->take(1) as $car)
                     <div class="bg-white rounded-2xl overflow-hidden shadow hover:shadow-lg transition-shadow duration-300">
-                        <!-- Reduced image size for better fit -->
                         <img src="{{ asset('images/cars/' . $car['image']) }}" alt="{{ $car['name'] }}" class="w-full h-32 object-cover">
                         <div class="p-4">
                             <h3 class="font-semibold text-lg text-[#333333] mb-1">{{ $car['name'] }}</h3>
@@ -156,6 +156,7 @@
                 ];
             @endphp
 
+            <!-- loops services then creates cards for each -->
             @foreach($services as $service)
             <a href="/services" class="block bg-white border border-gray-200 shadow-md p-6 rounded-xl text-center cursor-pointer transition-transform transform hover:-translate-y-2 hover:shadow-lg">
                 <i class="fas fa-{{ $service['icon'] }} text-3xl text-gray-700"></i>

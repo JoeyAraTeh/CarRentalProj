@@ -22,12 +22,12 @@
             </tr>
         </thead>
         <tbody>
+        <!-- displays each rental record in a table row and manages the rental status -->
         @foreach($rentals as $rental)
         <tr class="border-t
             @if($rental->status == 'pending') status-pending
             @elseif($rental->status == 'confirmed') status-confirmed
             @elseif($rental->status == 'completed') status-completed
-            @elseif($rental->status == 'cancelled') status-cancelled
             @endif
         ">
             <td class="px-4 py-2">{{ $rental->id }}</td>
@@ -44,7 +44,6 @@
                         <option value="pending" {{ $rental->status == 'pending' ? 'selected' : '' }}>Pending</option>
                         <option value="confirmed" {{ $rental->status == 'confirmed' ? 'selected' : '' }}>Confirmed</option>
                         <option value="completed" {{ $rental->status == 'completed' ? 'selected' : '' }}>Completed</option>
-                        <option value="cancelled" {{ $rental->status == 'cancelled' ? 'selected' : '' }}>Cancelled</option>
                     </select>
                 </form>
             </td>

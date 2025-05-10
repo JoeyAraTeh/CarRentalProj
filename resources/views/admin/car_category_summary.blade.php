@@ -11,6 +11,8 @@
             </tr>
         </thead>
         <tbody>
+            <!-- loops through the $categories data passed from the controller -->
+            <!-- creates new row for each categorys w/ name and total cars -->
             @foreach($categories as $category)
                 <tr class="border-t">
                     <td class="px-4 py-2">{{ $category->category }}</td>

@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="relative bg-white min-h-screen py-16 px-6">
-    <!-- Header -->
     <div class="text-center mb-12 mt-10">
         <h1 class="text-5xl font-extrabold text-gray-900 tracking-wide">Our Services</h1>
         <p class="text-gray-600 mt-3 text-lg">Experience comfort, luxury, and efficiency in every ride.</p>
@@ -21,17 +20,13 @@
             ];
         @endphp
 
+        <!-- creates box for every services -->
         @foreach($services as $service)
         <div class="relative bg-white border border-gray-200 shadow-md p-8 rounded-xl transition-transform duration-300 transform hover:-translate-y-2 hover:shadow-lg">
-            <!-- Icon -->
             <div class="flex items-center justify-center w-16 h-16 bg-gray-100 text-gray-800 rounded-full mx-auto shadow-sm">
                 <i class="fas fa-{{ $service['icon'] }} text-3xl"></i>
             </div>
-
-            <!-- Title -->
             <h2 class="text-2xl font-semibold text-gray-900 mt-6 text-center">{{ $service['title'] }}</h2>
-
-            <!-- Description -->
             <p class="text-gray-600 text-center mt-3 leading-relaxed">{{ $service['desc'] }}</p>
         </div>
         @endforeach

@@ -94,6 +94,7 @@
                 ];
             @endphp
 
+            <!-- displays services -->
             @foreach($services as $service)
             <a href="/services" class="block bg-white border border-gray-200 shadow-md p-6 rounded-xl text-center cursor-pointer transition-transform transform hover:-translate-y-2 hover:shadow-lg">
                 <i class="fas fa-{{ $service['icon'] }} text-3xl text-gray-700"></i>

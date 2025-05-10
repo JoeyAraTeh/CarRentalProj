@@ -88,35 +88,35 @@ class AdminCarController extends Controller
         return view('admin.edit', compact('car'));
     }
 
+    //counts how many cars are in a category and shows the result in the page
     public function carCategorySummary()
     {
+        // Get the number of cars in each category
         $subquery = Car::select('category', \DB::raw('COUNT(*) as total'))
             ->groupBy('category');
 
+        //uses grouped result like a table
         $categories = \DB::table(\DB::raw("({$subquery->toSql()}) as sub"))
             ->mergeBindings($subquery->getQuery())
             ->select('sub.category', 'sub.total')
             ->get();
-
+        
+        //displays result   
         return view('admin.car_category_summary', compact('categories'));
     }
 
     public function updateRentalStatus($id, Request $request)
-{
-    $request->validate([
-        'status' => 'required|in:pending,confirmed,completed,cancelled',
-    ]);
+    {
+        $request->validate([
+            'status' => 'required|in:pending,confirmed,completed',
+        ]);
 
-    $rental = Booking::findOrFail($id);
+        $rental = Booking::findOrFail($id);
 
-    if ($request->status === 'cancelled') {
-        $rental->delete(); // 🚮 Delete booking if cancelled
-        return redirect()->route('admin.rentals')->with('success', 'Booking cancelled and deleted.');
+        $rental->status = $request->status;
+        $rental->save();
+
+        return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
     }
 
-    $rental->status = $request->status;
-    $rental->save();
-
-    return redirect()->route('admin.rentals')->with('success', 'Booking status updated successfully.');
-}
 }

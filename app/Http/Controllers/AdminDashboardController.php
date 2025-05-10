@@ -38,7 +38,6 @@ class AdminDashboardController extends Controller
 
     public function viewMessages()
 {
-    // Assuming you have a Message model to fetch messages from the database
     $messages = \App\Models\ContactMessage::all(); // Fetch all messages from the 'messages' table
 
     return view('admin.messages', compact('messages')); // Pass messages to the view

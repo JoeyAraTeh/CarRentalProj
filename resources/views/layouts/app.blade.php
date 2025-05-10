@@ -104,7 +104,7 @@
         <div>
             <h4 class="text-lg font-semibold mb-3">Contact</h4>
             <ul class="space-y-2 text-sm text-gray-300">
-                <li>Email: info@flexidrive.com</li>
+                <li>Email: flexidrive@gmail.com</li>
                 <li>Phone: +63 912 345 6789</li>
                 <li>Location: Davao City, Philippines</li>
             </ul>

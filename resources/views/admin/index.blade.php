@@ -6,9 +6,11 @@
 
     <a href="{{ route('cars.create') }}" class="bg-blue-500 text-white px-4 py-2 rounded">Add New Car</a>
 
+    <!-- organizes car by category -->
     @foreach($cars as $category => $group)
         <h2 class="text-xl font-semibold mt-6 mb-2">{{ $category }}</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <!-- displays details of each car with options to manage them -->
             @foreach($group as $car)
                 <div class="border p-4 rounded shadow">
                     <img src="{{ asset('images/' . $car->image) }}" class="h-40 w-full object-cover mb-2" alt="{{ $car->brand }}">
